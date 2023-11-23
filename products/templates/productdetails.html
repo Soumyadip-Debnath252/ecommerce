@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+product details
+{% endblock %}
+
+{% block body %}
+<!-- Latest Product Begin -->
+<!-- Product Page Section Beign -->
+<section class="product-page">
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-slider owl-carousel">
+                    <div class="product-img" style="width: 80%;">
+                        <figure>
+                            <img src="{{p_obj.thambnali}}" alt="">
+                            <div class="p-status">new</div>
+                        </figure>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="col-lg-6">
+                <div class="product-content">
+                    <h2>{{p_obj.title}}</h2>
+                    <div class="pc-meta">
+                        <h5>${{p_obj.price}}</h5>
+                        
+                    </div>
+                    <p>{{p_obj.description}}</p>
+                    <ul class="tags">
+                        <li><span>Category :</span>{{p_obj.category}}</li>
+                        <li><span>Status :</span> 
+                            {% if p_obj.is_stock %}
+                            In stock
+                            {% else %}
+                            Outof stock
+                            {% endif %}
+                        </li>
+                    </ul>
+                    <div class="product-quantity">
+                        <div class="pro-qty">
+                            <input type="text" value="1">
+                        </div>
+                    </div>
+                    {% if p_obj.is_stock %}          
+                    <form action="{% url 'shoppingcart' p_obj.slug %}" method="POST">
+                        {% csrf_token %}
+                        <button class="primary-btn pc-btn" type="submit"> Add to cart</button>
+                    </form>
+                    {% endif %}
+                    <ul class="p-info">
+                        <li>Product Information</li>
+                        <li>Reviews</li>
+                        <li>Product Care</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Page Section End -->
+
+<!-- Related Product Section Begin -->
+<section class="related-product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>Related Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="single-product-item">
+                    <figure>
+                        <a href="#"><img src="{% static 'img/products/img-1.jpg' %}" alt=""></a>
+                        <div class="p-status">new</div>
+                    </figure>
+                    <div class="product-text">
+                        <h6>Green Dress with details</h6>
+                        <p>$22.90</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Related Product Section End -->
+{% endblock %}

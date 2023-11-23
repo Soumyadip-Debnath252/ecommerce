@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+categorydetails
+{% endblock %}
+{% block body %}
+<section class="categories-page spad">
+    <div class="container">
+        <div class="categories-controls">
+            total({{c_obj.products.count}})
+        </div>
+        <div class="row">
+
+             {% for j in c_obj.products.all %}
+            <div class="col-lg-3 col-md-6">
+                <div class="single-product-item">
+                    <figure>
+                        <img src="{{j.thambnali}}" alt="">
+                        <div class="p-status">New</div>
+                        <div class="hover-icon">
+                            <a href="{% static 'img/products/img-5.jpg' %}" class="pop-up"><img src="{% static 'img/icons/zoom-plus.png"
+                                    alt=""></a>
+                        </div>
+                    </figure>
+                    <div class="product-text">
+                        <a href="#">
+                            <h6>{{j.description}}</h6>
+                        </a>
+                        <p>${{j.price}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        
+    </div>
+</section>
+{% endblock %}
